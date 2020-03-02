@@ -1,88 +1,61 @@
-* {
-    font: garamond;
-  }
+header {
+  background-image: url('img/colorbackground.jpg');
+  height: 100px;
+  padding-top: 20px;
+  box-shadow: 5px 3px 8px #888888;
+  color: white;
+}
+
+body {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#H1 {
+  font-family: 'Saira', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  font-style: italic;
+  font-size: xx-large;
+  background-color: rgb(176, 236, 35);
+  color: rgb(40, 21, 58);
   
-  input {
-    width: 200px;
-    margin: 10px;
-  }
-  
-  .frame {
-    display: inline;
-    max-width: 220px;
-    margin: 20px;
-  }
-  .pic {
-    max-width: 200px;
-  }
-  .clickable {
-    max-width: 200px;
-    max-height: 200px;
-  }
-  #H1{
-    background-color: blueviolet;
-    text-align: center;
-    font-size: larger;
-    font-style: italic;
-  
-  }
-  #P1{
-    color: rgb(58, 23, 23);
-    background-color: rgb(142, 226, 59);
-    font-style: initial;
-    font-size: medium;
-  
-  }
-  #P2{
-    color: #2b2828;
-    background-color: rgb(172, 238, 216);
-    font-size: small;
-  }
-  
-  
-  header {
-    height: 100px;
-    padding-top: 20px;
-    box-shadow: 5px 3px 8px #888888;
-    color: white;
-  }
-  
-  body {
-    text-align: center;
-    margin: 0;
-    padding: 0;
-  }
-  
-  h1 {
-    font-family: 'Saira', sans-serif;
-    font-weight: 700;
-  }
-  
-  p {
-    font-family: 'Saira', sans-serif;
-    font-weight: 300;
-  }
-  
-  img {
-    max-width: 200px;
-    max-height: 200px;
-    display: inline-block;
-    margin-left: 100px;
-    margin-top: 50px;
-    padding-bottom: 50px;
-  }
-  
-  footer {
-    height: 200px;
-    margin-top: 150px;
-  }
-  
-  ul li {
-    list-style: none;
-  }
-  
-  canvas {
-    margin-left: 200px;
-  }
-  
-  
+}
+
+#P1 {
+  font-family: 'Saira', sans-serif;
+  font-weight: 300;
+  text-align: center;
+  background-color: chartreuse;
+  color: brown;
+}
+#P2{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 200;
+  text-align: center;
+  background-color: cornflowerblue;
+  color: crimson;
+}
+img {
+  max-width: 200px;
+  max-height: 200px;
+  display: inline-block;
+  margin-left: 100px;
+  margin-top: 50px;
+  padding-bottom: 50px;
+}
+
+footer {
+  height: 200px;
+  background-image: url('img/monobackground.jpg');
+  margin-top: 150px;
+}
+
+ul li {
+  list-style: none;
+}
+
+canvas {
+  margin-left: 200px;
+}
