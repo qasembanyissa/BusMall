@@ -1,207 +1,181 @@
-//Make an object
 'use strict';
 
-//Array of products
-Product.allProducts = [];
-Product.activeSet = [];
-Product.lastDisplayed = [];
-Product.totalVotes = 25;
+product.firstImgEl = document.getElementById('first-pic');
+product.secondImgEl = document.getElementById('second-pic');
+product.thirdImgEl = document.getElementById('third-pic');
+product.ulElement = document.getElementById('results-list');
+product.chartContext = document.getElementById('results-chart');
 
-var votes = [];
-var names = [];
-// product section
-Product.section = document.getElementById('productsSection');
 
-Product.resultsList = document.getElementById('resultsList');
+product.displayed = [];
+product.totalVotes = [];
+product.totalClicks = 0;
+product.altTextLabels = [];
+product.priorproduct = JSON.parse(localStorage.getItem('priorResults'));
 
-var productOne = document.getElementById('productOne');
-var productTwo = document.getElementById('productTwo');
-var productThree = document.getElementById('productThree');
-
-function Product(name, filepath, altText) {
-  this.name = name;
-  this.filepath = filepath;
-  this.altText = altText;
-  this.votes = 0;
-  this.views = 0;
-  Product.allProducts.push(this);
+//stores productandise images in array using constructor function
+function product(filepath, description) {
+  this.path = filepath;
+  this.altText = description;
+  this.numClicked = 0;
+  this.numDisplayed = 0;
 }
 
-//Make new Products instances
+//short-circuits creation of these instances if they already exist in local storage
+product.allproduct = product.priorproduct || [
+  new product('img/bag.jpg', 'rolling suitcase resembling R2D2'),
+  new product('img/banana.jpg', 'banana slicer'),
+  new product('img/bathroom.jpg', 'bathroom stand that holds a tablet and toilet paper'),
+  new product('img/boots.jpg', 'pair of toe-less yellow rubber boots'),
+  new product('img/breakfast.jpg', 'mini toaster over/pan/coffee maker combo'),
+  new product('img/bubblegum.jpg', 'box of meatball bubblegum'),
+  new product('img/chair.jpg', 'red plastic chair with an upward-curving seat'),
+  new product('img/cthulhu.jpg', 'cthulhu action figure'),
+  new product('img/dog-duck.jpg', 'dog with a duck bill strapped to its face'),
+  new product('img/dragon.jpg', 'can of dragon meat'),
+  new product('img/pen.jpg', 'set of pens with plastic eating utensils as caps'),
+  new product('img/pet-sweep.jpg', 'box of dog shoes that sweep the floor'),
+  new product('img/scissors.jpg', 'pizza-cutter scissors'),
+  new product('img/shark.jpg', 'sleeping bag shaped like a shark'),
+  new product('img/sweep.png', 'baby onesie that sweeps the floor'),
+  new product('img/tauntaun.jpg', 'sleeping bag shaped like a tauntaun'),
+  new product('img/unicorn.jpg', 'can of unicorn meat'),
+  new product('img/usb.gif', 'USB drive shaped like a tentacle'),
+  new product('img/water-can.jpg', 'watering can with the spout pointing backward'),
+  new product('img/wine-glass.jpg', 'wine glass with the opening on the side')
+];
 
-new Product('Bag', 'images/bag.jpg','Bag');
-new Product('Banana Slicer', 'images/banana.jpg','Banana Slicer');
-new Product('Bathroom', 'images/bathroom.jpg','Bathroom');
-new Product('Boots', 'images/boots.jpg','Boots');
-new Product('Breakfast', 'images/breakfast.jpg','Breakfast');
-new Product('Bubblegum', 'images/bubblegum.jpg', 'Bubblegum');
-new Product('Chair', 'images/chair.jpg', 'Chair');
-new Product('Cthulhu', 'images/cthulhu.jpg', 'Cthulhu');
-new Product('Dog Duck', 'images/dog-duck.jpg', 'Dog Duck');
-new Product('Dragon Meat', 'images/dragon.jpg', 'Dragon Meat');
-new Product('Pen', 'images/pen.jpg', 'Pen');
-new Product('Pet Broom', 'images/pet-sweep.jpg', 'Pet Broom');
-new Product('Scissors', 'images/scissors.jpg', 'Scissors');
-new Product('Shark', 'images/shark.jpg', 'Shark');
-new Product('Sweep', 'images/sweep.png', 'Sweep');
-new Product('Tauntaun', 'images/tauntaun.jpg', 'Tauntaun');
-new Product('Unicorn Meat', 'images/unicorn.jpg', 'Unicorn Meat');
-new Product('Tentacle USB', 'images/usb.gif', 'Tentacle USB');
-new Product('Watering Can', 'images/water-can.jpg', 'Watering Can');
-new Product('Wine Glass', 'images/wine-glass.jpg', 'Wine Glass');
-
-
-//Randomly display products
-
-function randomProduct() {
-  var randomOne = Math.floor(Math.random() * Product.allProducts.length);
-  var randomTwo = Math.floor(Math.random() * Product.allProducts.length);
-  var randomThree = Math.floor(Math.random() * Product.allProducts.length);
-
-  //Confirm there are no duplicate images, and if there are, reroll
-  while(Product.lastDisplayed.includes(randomOne) || Product.lastDisplayed.includes(randomTwo) || Product.lastDisplayed.includes(randomThree) || randomOne === randomTwo || randomTwo == randomThree || randomThree == randomOne) {
-    randomOne = Math.floor(Math.random() * Product.allProducts.length);
-    randomTwo = Math.floor(Math.random() * Product.allProducts.length);
-    randomThree = Math.floor(Math.random() * Product.allProducts.length);
-  }
-
-  // Update images
-  productOne.src = Product.allProducts[randomOne].filepath;
-  productTwo.src = Product.allProducts[randomTwo].filepath;
-  productThree.src = Product.allProducts[randomThree].filepath;
-  productOne.altText = Product.allProducts[randomOne].altText;
-  productTwo.altText = Product.allProducts[randomTwo].altText;
-  productThree.altText = Product.allProducts[randomThree].altText;
-
-  // Increments views for all images
-  Product.allProducts[randomOne].views++;
-  Product.allProducts[randomTwo].views++;
-  Product.allProducts[randomThree].views++;
-
-  Product.lastDisplayed[0] = randomOne;
-  Product.lastDisplayed[1] = randomTwo;
-  Product.lastDisplayed[2] = randomThree;
-}
-
-//Event Handler function
-function newSet (event) {
-
-  if (event.target.id === 'productsSection') {
-    return alert('Please click on an image.');
-
-  }
-//Decrement total available votes
-  Product.totalVotes--;
-
-//Count individual product votes
-  console.log('event.target', event.target.altText);
-  for(var i = 0; i < Product.allProducts.length; i++) {
-    if(event.target.altText === Product.allProducts[i].altText) {
-      Product.allProducts[i].votes++;
-      updateChartArrays();
-    }
-  }
-
-  if (Product.totalVotes < 1) {
-    Product.section.removeEventListener('click', newSet);
-    productsSection.innerHTML = '';
-    drawChart();
-  }
-  randomProduct();
-}
-
-
-//Update data arrays for chart
-function updateChartArrays() {
-  for (var i = 0; i < Product.allProducts.length; i++) {
-    names[i] = Product.allProducts[i].name;
-    votes[i] = Product.allProducts[i].votes;
-  }
-}
-
-//Chart Stuff
-var data = {
-  labels: names,
-  datasets: [
-    {
-      data: votes,
-      backgroundColor: [
-        'darkred',
-        'crimson',
-        'orangered',
-        'orange',
-        'coral',
-        'gold',
-        'yellow',
-        'chartreuse',
-        'turquoise',
-        'teal',
-        'paleturquoise',
-        'skyblue',
-        'cornflowerblue',
-        'royalblue',
-        'slateblue',
-        'mediumorchid',
-        'darkviolet',
-        'indigo',
-        'darkmagenta',
-        'deeppink'
-
-      ],
-      hoverBackgroundColor: [
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon',
-        'lemonchiffon'
-      ]
-    }]
+//creates random number generator
+product.randomNum = function() {
+  var ranNum = Math.floor(Math.random() * product.allproduct.length);
+  return ranNum;
 };
 
-function drawChart() {
-  var ctx = document.getElementById('productStats').getContext('2d');
-  songChart = new Chart(ctx,{
-    // type: 'doughnut',
-    type: 'pie',
+//creates array of random index numbers while avoiding repetition
+product.uniqueArray = function() {
+  var ranIndex = product.randomNum();
+  while(product.displayed.length < 6) {
+    if(!product.displayed.includes(ranIndex)){
+      product.displayed.unshift(ranIndex);
+    } else {
+      ranIndex = product.randomNum();
+    }
+  }
+};
 
-    data: data,
-    options: {
-      responsive: true,
-      animation: {
-        duration: 1000,
-        easing: 'easeInOutQuad'
-      }
+//renders 3 images at once
+product.renderproduct = function() {
+  product.uniqueArray();
+
+  product.firstImgEl.src = product.allproduct[product.displayed[0]].path;
+  product.firstImgEl.alt = product.allproduct[product.displayed[0]].altText;
+  product.allproduct[product.displayed[0]].numDisplayed++;
+
+  product.secondImgEl.src = product.allproduct[product.displayed[1]].path;
+  product.secondImgEl.alt = product.allproduct[product.displayed[1]].altText;
+  product.allproduct[product.displayed[1]].numDisplayed++;
+
+  product.thirdImgEl.src = product.allproduct[product.displayed[2]].path;
+  product.thirdImgEl.alt = product.allproduct[product.displayed[2]].altText;
+  product.allproduct[product.displayed[2]].numDisplayed++;
+
+  product.displayed.splice(2);
+};
+
+//tracks clicks, determines when to stop image selections and displays/stores results
+product.handleClick = function(event) {
+  product.totalClicks++;
+
+  for (var i = 0; i < product.allproduct.length; i++) {
+    if(event.target.alt === product.allproduct[i].altText) {
+      product.allproduct[i].numClicked++;
+    }
+  }
+
+  if(product.totalClicks > 24) {
+    product.firstImgEl.removeEventListener('click', product.handleClick);
+    product.secondImgEl.removeEventListener('click', product.handleClick);
+    product.thirdImgEl.removeEventListener('click', product.handleClick);
+    alert('This concludes the survey. Thank you.');
+    product.getVotes();
+    product.generateList();
+    product.displayChart();
+  } else {
+    product.renderproduct();
+  }
+};
+
+//creates arrays to store results and use in displaying results
+product.getVotes = function() {
+  for(var i = 0; i < product.allproduct.length; i++) {
+    product.totalVotes[i] = product.allproduct[i].numClicked;
+    product.altTextLabels[i] = product.allproduct[i].altText;
+  }
+};
+
+product.generateList = function() {
+  for(var i = 0; i < product.totalVotes.length; i++) {
+    var liElement = document.createElement('li');
+    liElement.textContent = `${product.totalVotes[i]} votes for the ${product.allproduct[i].altText}`;
+    product.ulElement.appendChild(liElement);
+  }
+};
+
+product.renderproduct();
+
+product.firstImgEl.addEventListener('click', product.handleClick);
+product.secondImgEl.addEventListener('click', product.handleClick);
+product.thirdImgEl.addEventListener('click', product.handleClick);
+
+product.displayChart = function() {
+  // eslint-disable-next-line no-undef
+  new Chart(product.chartContext, {
+    type: 'bar',
+    data: {
+      labels: product.altTextLabels,
+      datasets: [{
+        label: 'Number of Votes Per Product',
+        data: product.totalVotes,
+        backgroundColor: [
+          'darkred',
+          'crimson',
+          'orangered',
+          'orange',
+          'coral',
+          'gold',
+          'yellow',
+          'chartreuse',
+          'turquoise',
+          'teal',
+          'paleturquoise',
+          'skyblue',
+          'cornflowerblue',
+          'royalblue',
+          'slateblue',
+          'mediumorchid',
+          'darkviolet',
+          'indigo',
+          'darkmagenta',
+          'deeppink'
+  
+        ],
+      }],
     },
-    scales: {
-      yAxes: [{
-        ticks: {
-          max: 20,
-          min: 0,
-          stepSize: 1.0
-        }
-      }]
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            autoskip: false,
+            minRotation: 90,
+            maxRotation: 90
+          }
+        }]
+      }
     }
   });
-  chartDrawn = true;
-}
-
-
-//Event Listener
-Product.section.addEventListener('click', newSet);
-
-randomProduct();
+};
