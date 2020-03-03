@@ -19,8 +19,28 @@ input {
   max-width: 200px;
   max-height: 200px;
 }
+#H1{
+  background-color: blueviolet;
+  text-align: center;
+  font-size: larger;
+  font-style: italic;
+
+}
+#P1{
+  color: rgb(58, 23, 23);
+  background-color: rgb(142, 226, 59);
+  font-style: initial;
+  font-size: medium;
+
+}
+#P2{
+  color: #2b2828;
+  background-color: rgb(172, 238, 216);
+  font-size: small;
+}
+
+
 header {
-  background-image: url('img/colorbackground.jpg');
   height: 100px;
   padding-top: 20px;
   box-shadow: 5px 3px 8px #888888;
@@ -54,7 +74,6 @@ img {
 
 footer {
   height: 200px;
-  background-image: url('img/monobackground.jpg');
   margin-top: 150px;
 }
 
@@ -65,3 +84,4 @@ ul li {
 canvas {
   margin-left: 200px;
 }
+
