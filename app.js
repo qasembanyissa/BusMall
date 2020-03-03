@@ -12,7 +12,7 @@ var names = [];
 // product section
 Product.section = document.getElementById('productsSection');
 
-Product.resultsList = document.getElementById('resultsList');
+Product.resultsList = document.getElementById('productStats');
 
 var productOne = document.getElementById('productOne');
 var productTwo = document.getElementById('productTwo');
