@@ -177,7 +177,7 @@ function drawChart() {
   var ctx = document.getElementById('productStats').getContext('2d');
   songChart = new Chart(ctx,{
     // type: 'doughnut',
-    type: 'bar',
+    type: 'pie',
 
     data: data,
     options: {
