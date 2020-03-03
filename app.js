@@ -9,7 +9,7 @@ Product.totalVotes = 25;
 
 var votes = [];
 var names = [];
-
+// product section
 Product.section = document.getElementById('productsSection');
 
 Product.resultsList = document.getElementById('resultsList');
@@ -28,6 +28,7 @@ function Product(name, filepath, altText) {
 }
 
 //Make new Products instances
+
 new Product('Bag', 'images/bag.jpg','Bag');
 new Product('Banana Slicer', 'images/banana.jpg','Banana Slicer');
 new Product('Bathroom', 'images/bathroom.jpg','Bathroom');
