@@ -1,61 +1,98 @@
-header {
-  background-image: url('img/colorbackground.jpg');
-  height: 100px;
-  padding-top: 20px;
-  box-shadow: 5px 3px 8px #888888;
-  color: white;
-}
-
 body {
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-
-#H1 {
-  font-family: 'Saira', sans-serif;
-  font-weight: 700;
-  text-align: center;
-  font-style: italic;
-  font-size: xx-large;
-  background-color: rgb(176, 236, 35);
-  color: rgb(40, 21, 58);
-  
-}
-
-#P1 {
-  font-family: 'Saira', sans-serif;
-  font-weight: 300;
-  text-align: center;
-  background-color: chartreuse;
-  color: brown;
-}
-#P2{
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 200;
-  text-align: center;
-  background-color: cornflowerblue;
-  color: crimson;
-}
-img {
-  max-width: 200px;
-  max-height: 200px;
-  display: inline-block;
-  margin-left: 100px;
-  margin-top: 50px;
-  padding-bottom: 50px;
-}
-
-footer {
-  height: 200px;
-  background-image: url('img/monobackground.jpg');
-  margin-top: 150px;
-}
-
-ul li {
-  list-style: none;
+  background-color: #52658F;
 }
 
 canvas {
-  margin-left: 200px;
+  display: block;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #E8E8E8;
+  border: 8px outset;
+}
+
+canvas:empty {
+  display: none;
+}
+
+header {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heading-accent {
+  border: 3px solid #333A56;
+  width: 200px;
+  height: 100px;
+  padding: 5px;
+}
+
+h1 {
+  display: inline-block;
+  border-radius: 10px;
+  margin: 20px 80px 45px;
+  width: 400px;
+  text-align: center;
+  font-size: 40px;
+  font-family: 'Kavoon', cursive;
+  background-color: #F7F5E6;
+  color: #333A56;
+}
+
+h2 {
+  font-size: 28px;
+  text-decoration: underline;
+}
+
+#image-section {
+  width: 1000px;
+  border-bottom: 8px double #333A56;
+  border-top: 8px double #333A56;
+  margin: 30px auto 30px;
+  padding: 10px 0 10px;
+}
+
+#intro {
+  width: 1000px;
+  border-radius: 10px;
+  border: 8px groove #E8E8E8;
+  margin: 20px auto 60px;
+  padding: 5px 40px 10px;
+  background-color: #F7F5E6;
+  color: #333A56;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+p {
+  font-size: 20px;
+  font-style: italic;
+}
+
+#results-section img {
+  display: inline-block;
+  width: 310px;
+  height: 280px;
+  padding: 10px;
+}
+
+ul {
+  background-color: #E8E8E8;
+  border: 8px outset;
+  padding: 30px;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ul:empty {
+  display: none;
+}
+
+ul li {
+  list-style-type: circle;
+  list-style-position: inside;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333A56;
 }
