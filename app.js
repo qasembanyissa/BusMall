@@ -91,7 +91,7 @@ product.handleClick = function(event) {
       product.allproduct[i].numClicked++;
     }
   }
-
+  
   if(product.totalClicks > 24) {
     product.firstImgEl.removeEventListener('click', product.handleClick);
     product.secondImgEl.removeEventListener('click', product.handleClick);
@@ -100,6 +100,7 @@ product.handleClick = function(event) {
     product.getVotes();
     product.generateList();
     product.displayChart();
+    localStorage.setItem('priorResults', JSON.stringify(product.allproduct));
   } else {
     product.renderproduct();
   }
@@ -112,6 +113,28 @@ product.getVotes = function() {
     product.altTextLabels[i] = product.allproduct[i].altText;
   }
 };
+
+
+
+// // update drinks
+// function updateproduct() {
+//   var productString = JSON.stringify(Product);
+//   localStorage.setItem('productOrders', productString);
+// }
+
+// //get all drinks
+// function getproduct() {
+//   var productString = localStorage.getItem('productOrders');
+//   console.log(productString);
+//   if(productString) {
+//     Product = JSON.parse(productString);
+//     console.log(Product);
+//     renderOrders();
+    
+//   }
+// }
+// getproduct();
+
 
 product.generateList = function() {
   for(var i = 0; i < product.totalVotes.length; i++) {
@@ -156,9 +179,7 @@ product.displayChart = function() {
           'darkviolet',
           'indigo',
           'darkmagenta',
-          'deeppink'
-  
-        ],
+          'deeppink']
       }],
     },
     options: {
@@ -179,3 +200,5 @@ product.displayChart = function() {
     }
   });
 };
+
+// updateproduct();
