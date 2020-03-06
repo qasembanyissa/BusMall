@@ -1,31 +1,52 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>BusMall Market Research</title>
-    <!-- <link rel="stylesheet" href="reset.css"/> -->
-    <link rel="stylesheet" href="style.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Kavoon" rel="stylesheet">
-  </head>
-  <body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
     <header>
-    <img class = "heading-accent" src="img/tim-mossholder-1072772-unsplash.jpg" alt="decorative accent image"/>
-    <h1>Welcome!</h1>
-    <img class = "heading-accent" src="img/chris-knight-458508-unsplash.jpg" alt="decorative accent image"/>
+        <img src="supermarket.jpg" alt="">
+        <h1 id="H1">
+          all of this product , chose one of them
+            Product
+
+        </h1>
+     
+      
     </header>
-    <section id="intro">
-      <h2>Instructions:</h2>
-      <p>Thank you for your participation today. In each set of 3 images, please select the product you would be most likely to purchase. You will be notified upon completion.</p>
-    </section>
-    <section id="results-section">
-      <section id="image-section">
-        <img id="first-pic" src="" alt="">
-        <img id="second-pic" src="" alt="">
-        <img id="third-pic" src="" alt="">
-      </section>
-      <ul id="results-list"></ul>
-    </section>
-    <canvas id="results-chart"></canvas>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-    <script src="app.js"></script>
-  </body>
+
+    <main>
+        <aside>
+            <h2>
+                Result
+            </h2>
+            <ul id='finally'> 
+            </ul>
+
+
+        </aside>
+
+        <section id="allImages">
+            <img id="leftImage" src="" alt="" title="" />
+            <img id="centerImage" src="" alt="" title="" />
+            <img id="rightImage" src="" alt="" title="" />
+        </section>
+
+
+    </main>
+
+    <footer>
+        <p hidden>....</p>
+    </footer>
+    <canvas id="myChart"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="app.js">
+    </script>
+</body>
+
 </html>
